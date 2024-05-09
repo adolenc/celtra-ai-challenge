@@ -1,0 +1,126 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{gensymb}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{-1em} 
+
+\definecolor{labitorange}{RGB}{200, 0, 0}
+\usetheme{Singapore}
+\usecolortheme{dove}
+\setbeamercolor*{structure}{fg=labitorange!100}
+
+\title{Celtrin programerski izziv: Operacija Periskop}
+\author{Andrej Dolenc}
+\institute{\small{FMF IŠRM II}}
+\date{\small{\today}}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% % Show overview at every subsection
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}<beamer>
+%     \frametitle{Outline}
+%     \tableofcontents[
+%       currentsection,
+%       sectionstyle=show/show,
+%       subsectionstyle=show/shaded/hide]
+%   \end{frame}
+% }
+
+% Hide navigation header
+\makeatletter
+\renewcommand*\insertnavigation[1]{\vspace{16pt}}
+\makeatother
+
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\makeatletter
+\def\progressbar@progressbar{}
+\newcount\progressbar@tmpcounta
+\newcount\progressbar@tmpcountb
+\newdimen\progressbar@pbht
+\newdimen\progressbar@pbwd
+\newdimen\progressbar@tmpdim
+
+\progressbar@pbwd=\paperwidth
+\progressbar@pbht=2pt
+
+% the progress bar
+\def\progressbar@progressbar{%
+
+    \progressbar@tmpcounta=\insertframenumber
+    \progressbar@tmpcountb=\inserttotalframenumber
+    \advance \progressbar@tmpcounta by -1
+    \advance \progressbar@tmpcountb by -1
+    % \advance \progressbar@tmpcounta by -2
+    % \advance \progressbar@tmpcountb by -2
+    \progressbar@tmpdim=\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+  \begin{tikzpicture}
+
+      % slider
+    \usebeamercolor{normal text}
+    \fill[color=bg!90!fg]
+      (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+
+    \usebeamercolor{structure}
+    \fill[color=fg!75!bg]
+      (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+
+      % page number
+    \usebeamercolor{normal text}
+    \node[color=fg, align=center, anchor=east] at
+    (\progressbar@pbwd, \progressbar@pbht * 4) {\insertframenumber /\inserttotalframenumber};
+
+      % title
+    % \node[color=fg, align=center, anchor=west] at
+    % (0, \progressbar@pbht * 4) {\footnotesize{\insertauthor}};
+  \end{tikzpicture}
+}
+
+% \addtobeamertemplate{footline}{}
+% {
+%   % Show progressbar
+%   \progressbar@progressbar
+% }
+% \makeatother
+
+
+\begin{document}
+
+% Title frame
+{
+  % Hide progressbar from frame
+  \setbeamertemplate{footline}{} 
+  % Hide navigation bar from frame
+  \renewcommand*\insertnavigation[1]{\vspace{22pt}}
+  \begin{frame}
+    \vspace{60pt}
+    \titlepage
+  \end{frame}
+}
+% % Don't count title frame as a frame
+% \addtocounter{framenumber}{-1}
+
+% % Outline frame
+% {
+% \renewcommand*\insertnavigation[1]{\vspace{22pt}}
+% \begin{frame}{Kazalo}
+%   \tableofcontents
+% \end{frame}
+% }
+
+\include{slides}
+
+\end{document}

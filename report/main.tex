@@ -1,0 +1,45 @@
+\documentclass[a4paper]{amsart}
+% \usepackage[slovene, english]{babel}
+\usepackage{times}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\usepackage[bottom]{footmisc} % footnotes go on the bottom of the page
+\usepackage{newclude} % use \include* to avoid pagebreaks after \includes
+\usepackage{cite}
+\usepackage{graphicx} % for images
+\usepackage{float} % images should be where they are referenced
+\usepackage[center]{caption}
+\usepackage{subcaption}
+\usepackage{chngcntr}
+\usepackage{captcont}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames]{color}
+
+\counterwithin{figure}{section}
+\counterwithin{equation}{section}
+\bibliographystyle{ieeetr}
+% \renewcommand{\bibname}{Literatura}
+\renewcommand{\refname}{Reference}
+
+\newcommand{\todo}[1]{\textcolor{red}{TODO:~#1}\PackageWarning{TODO:}{#1!}}
+\newcommand{\eng}[1]{(ang. \textit{#1})}
+
+
+\title{Porocilo resitve naloge Operacija Periskop}
+\author[Andrej Dolenc]{Andrej Dolenc}
+\date{\today}
+
+% \includeonly{summary}
+\begin{document}
+\maketitle
+
+\include*{intro}
+\include*{data}
+\include*{results}
+\include*{summary}
+
+\bibliography{references}
+\end{document}
